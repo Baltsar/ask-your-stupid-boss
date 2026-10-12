@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="560" viewBox="0 0 880 560" role="img" aria-labelledby="title desc">
+  <title id="title">Ask your stupid boss</title>
+  <desc id="desc">Haiku sits above Opus, asks for a database, and cannot touch the files. Opus does the work and may say no.</desc>
+  <rect width="880" height="560" fill="#f3efe4"/>
+  <rect x="24" y="24" width="832" height="512" fill="none" stroke="#1c1915" stroke-width="3"/>
+  <text x="48" y="72" fill="#1c1915" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="28" font-weight="700">ASK YOUR STUPID BOSS</text>
+  <text x="48" y="102" fill="#5c564c" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14">the strong model works. the weak model has the title.</text>
+
+  <rect x="250" y="132" width="380" height="118" fill="#f6d56b" stroke="#1c1915" stroke-width="3"/>
+  <text x="270" y="164" fill="#1c1915" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13">ADVISOR · no tools</text>
+  <text x="270" y="192" fill="#1c1915" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="22" font-weight="700">Haiku 4.5</text>
+  <text x="270" y="220" fill="#1c1915" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14">Do we need a database?</text>
+
+  <line x1="440" y1="250" x2="440" y2="304" stroke="#1c1915" stroke-width="3"/>
+  <polygon points="440,312 432,296 448,296" fill="#1c1915"/>
+
+  <rect x="140" y="320" width="600" height="140" fill="#1c1915"/>
+  <text x="164" y="356" fill="#f3efe4" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13">MAIN · does the work</text>
+  <text x="164" y="390" fill="#f6d56b" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="28" font-weight="700">Opus 5.5</text>
+  <text x="164" y="424" fill="#f3efe4" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="16">No. Here is the list.</text>
+
+  <text x="48" y="500" fill="#5c564c" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13">The boss can complain. The boss cannot open a file, run a command, or hire a subcommittee.</text>
+</svg>

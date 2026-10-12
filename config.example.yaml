@@ -1,0 +1,24 @@
+# Exempel. Den här filen läses inte automatiskt.
+# ID:n är kopierade från Claude Codes lokala katalog, inte härledda från namnen.
+# Kör `catalog` och `setup` för att välja på riktigt.
+version: 1
+enabled: true
+mode: live
+main:
+  display_name: Opus 5.5
+  model_id: claude-opus-5-5
+  verification: user_confirmed
+advisor:
+  display_name: Haiku 4.5
+  provider: claude-cli
+  model_id: claude-haiku-4-5-20251001
+consultation:
+  max_per_task: 2
+  timeout_seconds: 30
+  max_briefing_chars: 12000
+  max_output_tokens: 600
+presentation:
+  humor: dry
+  language: match_user
+logging:
+  save_content: false

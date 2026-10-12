@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Ask your stupid boss briefing",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "task_id",
+    "reason",
+    "task",
+    "proposed_plan",
+    "decision",
+    "constraints",
+    "relevant_excerpt"
+  ],
+  "properties": {
+    "task_id": { "type": "string", "minLength": 1, "maxLength": 80 },
+    "reason": {
+      "enum": ["initial_plan", "new_decision", "user_requested"]
+    },
+    "task": { "type": "string", "minLength": 1 },
+    "proposed_plan": { "type": "string", "minLength": 1 },
+    "decision": { "type": "string", "minLength": 1 },
+    "constraints": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "relevant_excerpt": { "type": ["string", "null"] }
+  }
+}

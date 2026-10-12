@@ -1,0 +1,7 @@
+#!/bin/bash
+set -euo pipefail
+ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+# shellcheck disable=SC1091
+source "$ROOT/scripts/find-node.sh"
+# shellcheck disable=SC2086
+exec "$NODE" $NODE_FLAGS "$ROOT/src/consult-advisor.ts" "$@"

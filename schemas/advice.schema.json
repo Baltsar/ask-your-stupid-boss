@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Ask your stupid boss advice",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "verdict",
+    "main_objection",
+    "simpler_alternative",
+    "question",
+    "uncertainty",
+    "executive_remark"
+  ],
+  "properties": {
+    "verdict": {
+      "enum": ["approve", "simplify", "reconsider", "insufficient_context"]
+    },
+    "main_objection": { "type": ["string", "null"] },
+    "simpler_alternative": { "type": ["string", "null"] },
+    "question": { "type": ["string", "null"] },
+    "uncertainty": { "type": ["string", "null"] },
+    "executive_remark": { "type": ["string", "null"] }
+  }
+}

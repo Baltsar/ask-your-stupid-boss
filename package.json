@@ -1,0 +1,9 @@
+{
+  "name": "ask-your-stupid-boss",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "bash scripts/run-ts.sh tests/consult.test.ts",
+    "ask-your-stupid-boss": "bash bin/ask-your-stupid-boss"
+  }
+}
