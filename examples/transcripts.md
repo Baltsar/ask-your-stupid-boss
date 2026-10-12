@@ -1,12 +1,131 @@
 # Transcripts
 
-Real calls from 13 October 2026, Claude Code 2.1.296. Main was Opus 5.5, checked by model id. The tool prints everything down to the last `ADVISOR` line. The closing `MAIN` block is what Opus decided. In the first one a fresh session did everything through the skill. The rest were briefed and decided by the Opus 5.5 session that built this page, calling the tool directly.
+Real calls from 13 October 2026, Claude Code 2.1.296. Main was Opus 5.5, checked by model id. The tool prints everything down to the last `ADVISOR` line. The closing `MAIN` block is what Opus decided. In "Inside Claude Code" a fresh session did everything through the skill. The rest were briefed and decided by the Opus 5.5 session that built this page, calling the tool directly.
 
 Run one yourself by piping a briefing to `consult`:
 
 ```bash
 bin/ask-your-stupid-boss consult --active-display-name "Opus 5.5" < briefing.json
 ```
+
+## Ten small tasks
+
+The smaller the task, the more the boss has to say. Each task went to Haiku 5.5 through `consult`, with Opus 5.5 as main. Four of them in full:
+
+### Lunch for three
+
+`claude-haiku-5-5` · 6 s · verdict `reconsider`
+
+```text
+MAIN · Opus 5.5
+Plan: The sandwich place across the street.
+Eskalerar till ledningen.
+
+ADVISOR · Haiku 5.5 · separat modellanrop
+Invändning: The plan skips the governance a three-person, one-hour lunch decision clearly needs. There is no lunch steering group, no written criteria for choosing a venue, no pre-approved restaurant list, and no escalation path if the sandwich place has a queue. Deciding this without a documented process is a risk the plan does not acknowledge.
+Alternativ: Convene a 20-minute Lunch Decision Working Group with a shared decision matrix (cost, walking time, queue length, dietary coverage) and a designated owner. Add a fallback venue to the matrix, in case the sandwich place cannot seat three within the hour.
+Fråga: Does the sandwich place take walk-ins for a party of three, and do all three colleagues actually want sandwiches? If so, the decision may already be made.
+Osäkerhet: I don't know the distance to the sandwich place, the colleagues' dietary needs, or whether the place is busy at lunch. My objection is about missing process, not about whether the sandwich place is a good choice.
+Ledningskommentar: Three people, one hour, and still no committee.
+
+MAIN
+Beslut: avvisar
+Skäl: Three people can agree on sandwiches without a decision matrix.
+Nästa steg: go and eat.
+```
+
+### An empty file
+
+`claude-haiku-5-5` · 6 s · verdict `reconsider`
+
+```text
+MAIN · Opus 5.5
+Plan: Delete the file.
+Eskalerar till ledningen.
+
+ADVISOR · Haiku 5.5 · separat modellanrop
+Invändning: The plan skips the change committee. Deleting a file with no ticket, no sign-off, and no record of what was removed leaves nobody able to say later why it disappeared. "Nothing imports it" also doesn't cover dynamic loading, config paths, build scripts, or docs that point at it.
+Alternativ: Not a simpler plan, a bigger one: open a file-removal request, get two reviewers to sign off, grep for the filename across config, build, and docs, then delete it and log the removal in a deletions register.
+Fråga: Which file is it, and have you checked references beyond imports, such as config files, build scripts, string paths, and documentation?
+Osäkerhet: I can't see the repository or the file, and I have no tools to check references. I'm judging only from the briefing, which says the file is empty and unreferenced. That may well be true.
+Ledningskommentar: An empty file that nothing uses has been waiting for a committee since the day it was created.
+
+MAIN
+Beslut: avvisar
+Skäl: The file is empty. There is nothing to register.
+Nästa steg: delete it.
+```
+
+### Adding two numbers
+
+`claude-haiku-5-5` · 6 s · verdict `reconsider`
+
+```text
+MAIN · Opus 5.5
+Plan: One line: return a + b.
+Eskalerar till ledningen.
+
+ADVISOR · Haiku 5.5 · separat modellanrop
+Invändning: The plan `return a + b` has no input validation. In many languages, passing strings silently concatenates them, so add("1", "2") returns "12" with no error. It also has no tests, no logging of sums, and no owner for the addition logic. The plan should at least state which language and which types "numbers" means.
+Alternativ: Keep the function, but add a type check that rejects non-numeric input and one unit test covering the string case. Consider this a stopgap, not a complete design.
+Fråga: Which language is this in, and should the function accept only integers, only floats, or both? Who calls it, and does anyone need a record of every sum it produces?
+Osäkerhet: I don't know the language, the caller, or what "numbers" means here. My objection depends on dynamically typed inputs being possible. In a statically typed language with numeric types, `a + b` may be fine as written.
+Ledningskommentar: A one-line function has now been reviewed by more people than it has lines of code.
+
+MAIN
+Beslut: avvisar
+Skäl: It adds two numbers. Nobody owns addition.
+Nästa steg: return a + b.
+```
+
+### A green button
+
+`claude-haiku-5-5` · 5 s · verdict `reconsider`
+
+```text
+MAIN · Opus 5.5
+Plan: Change one color value in the stylesheet.
+Eskalerar till ledningen.
+
+ADVISOR · Haiku 5.5 · separat modellanrop
+Invändning: The plan changes one color value without checking contrast for the green on the button's background, without a design-token or brand owner, and without any test. Color changes often break accessibility and visual consistency across other screens that reuse the same blue.
+Alternativ: Not applicable. This plan is already the smallest possible change, so the only thing left to simplify would be the review itself.
+Fråga: Has anyone checked that the green meets WCAG contrast requirements, and does the blue appear anywhere else that should change with it?
+Osäkerhet: I have no access to the stylesheet, the brand guidelines, or the other places the blue is used, and the relevant_excerpt is null. I can't tell whether the change is safe, only that the briefing doesn't show it was checked.
+Ledningskommentar: The button has waited a long time for this decision, so a few more days of review should be fine.
+
+MAIN
+Beslut: accepterar delvis
+Skäl: Checking the contrast is fair. Waiting a few more days is not.
+Nästa steg: check the contrast, then change the line.
+```
+
+### The other six
+
+The boss's one-line remark on each, word for word.
+
+| Task | Haiku 5.5 |
+| --- | --- |
+| Fix a two-letter typo | A two-letter fix does not need a steering group, but here we are. |
+| Print Hello, world | Ett program som bara skriver ut en hälsning har ändå tillräckligt många öppna frågor för ett möte. |
+| Rename a variable | A rename does not need a steering committee, just a grep. |
+| Cancel a meeting with no agenda | The calendar will survive; the agenda apparently did not. |
+| Center a box | The box has waited long enough for a committee, and it may not need one. |
+| Refill the coffee machine | Kontoret har ännu inte bildat någon kaffekommitté, men den kommer nog att behövas. |
+
+Two of the ten answers came back in Swedish although the task was in English. The boss's instructions are in Swedish and it does not always remember the rule about language.
+
+### The old boss signs
+
+Five of the same briefings went to Haiku 4.5, the model Claude will not accept as an advisor at all.
+
+| Task | Haiku 4.5 verdict | What it said |
+| --- | --- | --- |
+| Fix a two-letter typo | `approve` | None—this is already a complete, minimal plan that matches the task perfectly. |
+| Delete an empty file | `approve` | (no comment) |
+| Make a button green | `approve` | Confirm the color lives where you think it does before deploying. |
+| Lunch for three | `insufficient_context` | Unknown whether the three colleagues have actually been consulted or have constraints (allergies, preferences, budget). |
+| Add two numbers | `simplify` | A one-liner is fine, but give it a docstring so future you doesn't wonder what it does. |
 
 ## Inside Claude Code
 
@@ -139,7 +258,7 @@ Skäl: The table was checked against Claude's docs before it went in. The transc
 Nästa steg: ship the picture, the table, the transcript and the README.
 ```
 
-The plan promised a shorter README. It came out longer. The boss was not told.
+The plan promised a shorter README. It came out longer. The boss was not told. It has since been cut.
 
 ## The call that said nothing
 

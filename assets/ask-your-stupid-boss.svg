@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1280" height="640" viewBox="0 0 1280 640" role="img" aria-labelledby="title desc" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">
   <title id="title">Ask your stupid boss</title>
-  <desc id="desc">Left: in Claude Code a small model doing the work asks a bigger advisor, Opus or Fable. Right: the uno reverse. In this repo the big model, Opus 5.5, does the work and asks a tiny Haiku 4.5 wearing a tie. Claude Code stamps it: cannot be used as an advisor. Opus rejects the advice.</desc>
+  <desc id="desc">Left: in Claude Code a small model doing the work asks a bigger advisor, Opus or Fable. Right: the uno reverse. In this repo the big model, Opus 5.5, does the work and asks a tiny Haiku 5.5 wearing a tie. Claude Code stamps it: cannot advise claude-opus-5-5. Opus rejects the advice.</desc>
   <rect width="1280" height="640" fill="#f3efe4"/>
   <rect x="16" y="16" width="1248" height="608" fill="none" stroke="#1c1915" stroke-width="3"/>
   <text x="48" y="74" fill="#1c1915" font-size="42" font-weight="700">ASK YOUR STUPID BOSS</text>
@@ -34,9 +34,9 @@
   <polygon points="52.15,37.1 59.85,37.1 64.05,58.10000000000001 56,66.5 47.95,58.10000000000001" fill="#1c1915"/>
   </g>
   <text x="724" y="214" fill="#1c1915" font-size="16">ADVISOR &#183; no tools &#183; no files &#183; no veto</text>
-  <text x="724" y="250" fill="#1c1915" font-size="30" font-weight="700">Haiku 4.5</text>
+  <text x="724" y="250" fill="#1c1915" font-size="30" font-weight="700">Haiku 5.5</text>
   <text x="724" y="276" fill="#1c1915" font-size="17">Director of Unnecessary Oversight</text>
-  <text x="724" y="312" fill="#1c1915" font-size="18" font-weight="700">&#8220;&#8230;it won't stay one user forever.&#8221;</text>
+  <text x="724" y="312" fill="#1c1915" font-size="18" font-weight="700">&#8220;The plan skips the change committee.&#8221;</text>
   <line x1="620" y1="376" x2="620" y2="350" stroke="#1c1915" stroke-width="3"/>
   <polygon points="620,338 611,354 629,354" fill="#1c1915"/>
   <text x="640" y="363" fill="#1c1915" font-size="17">asks anyway</text>
@@ -46,12 +46,12 @@
   </g>
   <text x="724" y="412" fill="#f3efe4" font-size="16">MAIN &#183; does the work &#183; may say no</text>
   <text x="724" y="448" fill="#f6d56b" font-size="30" font-weight="700">Opus 5.5</text>
-  <text x="724" y="474" fill="#f3efe4" font-size="17">Plan: a todo list for one person.</text>
-  <text x="724" y="510" fill="#f6d56b" font-size="18" font-weight="700">&#8220;Rejected. It is a todo list.&#8221;</text>
+  <text x="724" y="474" fill="#f3efe4" font-size="17">Plan: delete an empty file.</text>
+  <text x="724" y="510" fill="#f6d56b" font-size="18" font-weight="700">&#8220;Rejected. The file is empty.&#8221;</text>
   <g transform="rotate(-4 1030 146)">
   <rect x="836" y="117" width="388" height="58" fill="#f3efe4" stroke="#b3261e" stroke-width="3.5"/>
-  <text x="1030" y="142" fill="#b3261e" font-size="19" font-weight="700" text-anchor="middle">CANNOT BE USED AS AN ADVISOR</text>
-  <text x="1030" y="163" fill="#b3261e" font-size="13" text-anchor="middle" letter-spacing="1">CLAUDE CODE 2.1.296, ABOUT HAIKU 4.5</text>
+  <text x="1030" y="142" fill="#b3261e" font-size="19" font-weight="700" text-anchor="middle">cannot advise &quot;claude-opus-5-5&quot;</text>
+  <text x="1030" y="163" fill="#b3261e" font-size="13" text-anchor="middle" letter-spacing="1">CLAUDE CODE 2.1.296, TO HAIKU 5.5</text>
   </g>
   <text x="48" y="598" fill="#5c564c" font-size="17">The boss can complain. The boss cannot open a file, run a command, or veto.</text>
   <text x="1232" y="598" fill="#5c564c" font-size="15" text-anchor="end">parody &#183; not affiliated with Anthropic</text>
