@@ -198,7 +198,7 @@ function runProcess(input: {
     try {
       child = input.spawnImpl(input.bin, input.args, {
         cwd: os.tmpdir(),
-        env: process.env,
+        env: advisorEnv(),
         stdio: ["ignore", "pipe", "pipe"],
       });
     } catch (error) {
@@ -258,6 +258,17 @@ function runProcess(input: {
   });
 }
 
+// Thinking pushed a short answer past the timeout; models that cannot stop ignore the cap.
+// Haiku can call Claude's own advisor, and --tools "" does not remove it: with advisorModel
+// saved, the boss asked Opus what to say.
+function advisorEnv(): NodeJS.ProcessEnv {
+  return {
+    ...process.env,
+    MAX_THINKING_TOKENS: "0",
+    CLAUDE_CODE_DISABLE_ADVISOR_TOOL: "1",
+  };
+}
+
 function defaultSpawn(command: string, args: string[], options: SpawnOptions): Spawned {
   return spawn(command, args, options) as Spawned;
 }
@@ -310,15 +321,29 @@ function reportedModel(
   }
   const entries = Object.entries(usage as Record<string, unknown>);
   if (entries.length === 0) return { id: null, unexpected: false };
-  if (entries.length !== 1) return { id: entries[0][0], unexpected: true };
+  if (entries.length !== 1) {
+    const other = entries.find(([name]) => name !== requestedModelId);
+    return { id: (other ?? entries[0])[0], unexpected: true };
+  }
   const [id, detail] = entries[0];
   const canonical =
     detail && typeof detail === "object"
       ? (detail as { canonicalModel?: unknown }).canonicalModel
       : null;
-  const unexpected =
-    id !== requestedModelId || (typeof canonical === "string" && canonical !== requestedModelId);
-  return { id, unexpected };
+  if (id !== requestedModelId) return { id, unexpected: true };
+  if (typeof canonical === "string" && !sameModel(requestedModelId, canonical)) {
+    return { id: canonical, unexpected: true };
+  }
+  return { id, unexpected: false };
+}
+
+// Claude reports a dated snapshot under its undated canonical name.
+function sameModel(requestedModelId: string, canonical: string): boolean {
+  if (requestedModelId === canonical) return true;
+  return (
+    requestedModelId.startsWith(`${canonical}-`) &&
+    /^\d{8}$/.test(requestedModelId.slice(canonical.length + 1))
+  );
 }
 
 function readUsage(parsed: Record<string, unknown>): Usage | null {

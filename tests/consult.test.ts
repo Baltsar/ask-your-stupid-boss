@@ -630,6 +630,126 @@ test("claude output keeps nulls, rejects the wrong model, and hides secrets", ()
   assert.match(escaped.message ?? "", /verktyg/);
 });
 
+test("a dated id and its undated canonical name are the same model", () => {
+  const dated = normalizeClaudeOutput({
+    stdout: JSON.stringify({
+      is_error: false,
+      structured_output: ADVICE,
+      modelUsage: {
+        "claude-haiku-4-5-20251001": { canonicalModel: "claude-haiku-4-5" },
+      },
+    }),
+    stderr: "",
+    exitCode: 0,
+    attempted: true,
+    requestedModelId: "claude-haiku-4-5-20251001",
+    latencyMs: 10,
+  });
+  assert.equal(dated.status, "ok");
+  assert.equal(dated.reportedModelId, "claude-haiku-4-5-20251001");
+  assert.deepEqual(dated.advice, ADVICE);
+
+  const rerouted = normalizeClaudeOutput({
+    stdout: JSON.stringify({
+      is_error: false,
+      structured_output: ADVICE,
+      modelUsage: {
+        "claude-haiku-4-5-20251001": { canonicalModel: "claude-haiku-5-5" },
+      },
+    }),
+    stderr: "",
+    exitCode: 0,
+    attempted: true,
+    requestedModelId: "claude-haiku-4-5-20251001",
+    latencyMs: 10,
+  });
+  assert.equal(rerouted.errorKind, "unexpected_model");
+  assert.match(rerouted.message ?? "", /rapporterade claude-haiku-5-5 i stället för claude-haiku-4-5-20251001/);
+
+  const lookalike = normalizeClaudeOutput({
+    stdout: JSON.stringify({
+      is_error: false,
+      structured_output: ADVICE,
+      modelUsage: {
+        "claude-haiku-4-5-turbo": { canonicalModel: "claude-haiku-4-5" },
+      },
+    }),
+    stderr: "",
+    exitCode: 0,
+    attempted: true,
+    requestedModelId: "claude-haiku-4-5-turbo",
+    latencyMs: 10,
+  });
+  assert.equal(lookalike.errorKind, "unexpected_model");
+});
+
+test("the advisor call gets no thinking and no advisor of its own", async () => {
+  const seen: NodeJS.ProcessEnv[] = [];
+  const provider = createClaudeProvider({
+    bin: "claude",
+    spawnImpl: (_command, _args, options) => {
+      seen.push(options.env ?? {});
+      const child = new EventEmitter() as Spawned;
+      child.stdout = new PassThrough();
+      child.stderr = new PassThrough();
+      child.kill = () => true;
+      process.nextTick(() => child.emit("close", 1));
+      return child;
+    },
+  });
+  await provider.consult({
+    modelId: "claude-haiku-4-5-20251001",
+    systemPrompt: "x",
+    userPrompt: "y",
+    schema: {},
+    timeoutMs: 200,
+  });
+  assert.equal(seen.length, 1);
+  assert.equal(seen[0].MAX_THINKING_TOKENS, "0");
+  assert.equal(seen[0].CLAUDE_CODE_DISABLE_ADVISOR_TOOL, "1");
+  assert.equal(seen[0].PATH, process.env.PATH);
+  assert.equal(process.env.MAX_THINKING_TOKENS, undefined);
+});
+
+test("a boss who phoned a stronger model is named and thrown out", () => {
+  const phoned = normalizeClaudeOutput({
+    stdout: JSON.stringify({
+      is_error: false,
+      structured_output: ADVICE,
+      modelUsage: {
+        "claude-haiku-4-5-20251001": { canonicalModel: "claude-haiku-4-5" },
+        "claude-opus-5-5": { canonicalModel: "claude-opus-5-5" },
+      },
+      total_cost_usd: 0.08,
+    }),
+    stderr: "",
+    exitCode: 0,
+    attempted: true,
+    requestedModelId: "claude-haiku-4-5-20251001",
+    latencyMs: 10,
+  });
+  assert.equal(phoned.status, "failed");
+  assert.equal(phoned.errorKind, "unexpected_model");
+  assert.equal(phoned.advice, null);
+  assert.equal(phoned.reportedModelId, "claude-opus-5-5");
+  assert.match(phoned.message ?? "", /rapporterade claude-opus-5-5 i stället för claude-haiku-4-5-20251001/);
+  assert.equal(phoned.costUsd, 0.08);
+});
+
+test("setup leaves room for an advisor that cannot stop thinking", async () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), "ra-"));
+  const { home, catalogDir } = fixture(root);
+  await cli(
+    ["setup", "--main-id", "claude-opus-5-5", "--advisor-id", "claude-sonnet-4-6", "--mode", "live"],
+    { home, catalogDir },
+  );
+  assert.equal(loadConfig(home)?.consultation.timeout_seconds, 90);
+  const example = validateConfig(
+    parseYaml(fs.readFileSync(path.join(SKILL_ROOT, "config.example.yaml"), "utf8")),
+  );
+  assert.equal(example.consultation.timeout_seconds, 90);
+});
+
 test("a started process that times out counts as attempted", async () => {
   const provider = createClaudeProvider({
     bin: "claude",

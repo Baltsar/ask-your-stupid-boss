@@ -165,7 +165,7 @@ export function setupConfig(input: {
     },
     consultation: {
       max_per_task: 2,
-      timeout_seconds: 30,
+      timeout_seconds: 90,
       max_briefing_chars: 12000,
       max_output_tokens: 600,
     },
