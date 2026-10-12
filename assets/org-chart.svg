@@ -4,7 +4,7 @@
   <rect width="880" height="560" fill="#f3efe4"/>
   <rect x="24" y="24" width="832" height="512" fill="none" stroke="#1c1915" stroke-width="3"/>
   <text x="48" y="72" fill="#1c1915" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="28" font-weight="700">ASK YOUR STUPID BOSS</text>
-  <text x="48" y="102" fill="#5c564c" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14">the strong model works. the weak model has the title.</text>
+  <text x="48" y="102" fill="#5c564c" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14">Claude Code: Haiku 4.5 cannot advise. This repo asks anyway.</text>
 
   <rect x="250" y="132" width="380" height="118" fill="#f6d56b" stroke="#1c1915" stroke-width="3"/>
   <text x="270" y="164" fill="#1c1915" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13">ADVISOR · no tools</text>
