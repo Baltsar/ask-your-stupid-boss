@@ -1,11 +1,40 @@
 # Transcripts
 
-Real calls from 13 October 2026, Claude Code 2.1.296. Main was Opus 5.5, checked by model id. The tool prints everything down to the last `ADVISOR` line. The closing `MAIN` block is what Opus decided.
+Real calls from 13 October 2026, Claude Code 2.1.296. Main was Opus 5.5, checked by model id. The tool prints everything down to the last `ADVISOR` line. The closing `MAIN` block is what Opus decided. In the first one a fresh session did everything through the skill. The rest were briefed and decided by the Opus 5.5 session that built this page, calling the tool directly.
 
 Run one yourself by piping a briefing to `consult`:
 
 ```bash
 bin/ask-your-stupid-boss consult --active-display-name "Opus 5.5" < briefing.json
+```
+
+## Inside Claude Code
+
+The only transcript here where nothing was done by hand. A fresh Opus 5.5 session in Claude Code 2.1.296, with the skill in `.claude/skills/`, was given this:
+
+```text
+Ask your stupid boss. Task: build a command line todo list for one person (add, list, done). My plan: one file, about 80 lines, todos in a JSON file in the home directory. The choice: a JSON file or a database. Do not write any code. Consult, show the result, and give your decision.
+```
+
+Opus called the skill, wrote the briefing, ran `consult` and decided. `/ask-your-stupid-boss` was in that session's list of slash commands.
+
+`claude-haiku-4-5-20251001` · 11 s · $0.0054 · verdict `approve` · the Opus session around it cost $0.35
+
+```text
+MAIN · Opus 5.5
+Plan: One file, about 80 lines. Todos stored in a single JSON file in the user's home directory. Read the whole file on each command, change it in memory, write it back.
+Eskalerar till ledningen.
+
+ADVISOR · Haiku 4.5 · separat modellanrop
+Invändning: JSON with naive read-modify-write risks data loss if commands run concurrently or a crash occurs between read and write; atomic writes (temp file + rename) would mitigate.
+Fråga: Do you expect concurrent command execution from multiple terminals, or is single-threaded sequential use the only scenario?
+Osäkerhet: Concurrency assumptions are not stated. If the user runs two commands simultaneously, JSON + naive I/O fails silently. If strictly sequential, it's fine.
+Ledningskommentar: JSON is right-sized for this task; add atomic writes (temp + rename) to avoid edge-case data loss.
+
+MAIN
+Beslut: accepterar delvis
+Skäl: JSON file it is — a database buys nothing for one person and three commands, and costs a schema plus a harder-to-inspect file. I take the atomic write (temp file + rename), since it is about three lines and protects against a crash mid-write; I drop the concurrency worry, because one person typing commands one at a time does not race themselves.
+Nästa steg: Nothing — you asked for no code. The plan stands as: one file, ~80 lines, JSON in the home directory, written via temp file + rename.
 ```
 
 ## A todo list for one person

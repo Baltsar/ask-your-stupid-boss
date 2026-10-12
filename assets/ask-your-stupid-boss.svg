@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1280" height="640" viewBox="0 0 1280 640" role="img" aria-labelledby="title desc" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">
   <title id="title">Ask your stupid boss</title>
-  <desc id="desc">Left: in Claude Code a small model doing the work asks a bigger advisor, Opus or Fable. Right: in this repo the big model, Opus 5.5, does the work and asks a tiny Haiku 4.5 wearing a tie. Claude Code stamps it: cannot be used as an advisor. Opus rejects the advice.</desc>
+  <desc id="desc">Left: in Claude Code a small model doing the work asks a bigger advisor, Opus or Fable. Right: the uno reverse. In this repo the big model, Opus 5.5, does the work and asks a tiny Haiku 4.5 wearing a tie. Claude Code stamps it: cannot be used as an advisor. Opus rejects the advice.</desc>
   <rect width="1280" height="640" fill="#f3efe4"/>
   <rect x="16" y="16" width="1248" height="608" fill="none" stroke="#1c1915" stroke-width="3"/>
   <text x="48" y="74" fill="#1c1915" font-size="42" font-weight="700">ASK YOUR STUPID BOSS</text>
@@ -26,7 +26,7 @@
   <text x="68" y="526" fill="#1c1915" font-size="18" font-weight="700">Weaker asks stronger.</text>
   <text x="68" y="550" fill="#5c564c" font-size="17">Claude allows this.</text>
   <rect x="492" y="128" width="740" height="438" fill="none" stroke="#1c1915" stroke-width="3"/>
-  <text x="512" y="160" fill="#1c1915" font-size="16" font-weight="700" letter-spacing="1">THIS REPO</text>
+  <text x="512" y="160" fill="#1c1915" font-size="16" font-weight="700" letter-spacing="1">THIS REPO &#183; UNO REVERSE</text>
   <rect x="512" y="176" width="700" height="160" fill="#f6d56b" stroke="#1c1915" stroke-width="3"/>
   <g transform="translate(564 212)">
   <path d="M14 0 L98 0 L98 28 L112 28 L112 42 L98 42 L98 56 L91 56 L91 70 L84 70 L84 56 L77 56 L77 70 L70 70 L70 56 L42 56 L42 70 L35 70 L35 56 L28 56 L28 70 L21 70 L21 56 L14 56 L14 42 L0 42 L0 28 L14 28 Z M28 14 L35 14 L35 28 L28 28 Z M77 14 L84 14 L84 28 L77 28 Z" fill="#d97757" fill-rule="evenodd"/>
