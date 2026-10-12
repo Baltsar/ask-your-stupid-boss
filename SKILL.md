@@ -40,6 +40,8 @@ Visa sedan `status` ordagrant.
 
 Gör det efter en kort plan, före implementation, när uppgiften har ett riktigt vägval.
 
+Skriv först raden `Asking your stupid boss…` som egen text, innan du kör `consult`. Anropet tar några sekunder, och användaren ska se att ledningen tillfrågas.
+
 Hoppa över hälsningar, rena omskrivningar och triviala svar.
 
 Andra anropet bara vid ett nytt vägval (`new_decision`) eller om användaren ber om det (`user_requested`). Ingen automatisk slutgranskning. Tredje anropet kräver att användaren sagt ja; skicka då `--allow-extra`.
@@ -104,7 +106,7 @@ Vid sorg, sjukdom, självskada, våld, rättslig nöd eller annan allvarlig pers
 
 ## Kostnad
 
-Nämn kostnad bara när `metadata.cost_usd` är ett tal. Annars inte alls.
+Nämn kostnad bara när `metadata.cost_usd` är ett tal. Annars inte alls. Kalla den en uppskattning till listpris: på ett abonnemang räknas anropet mot planens användning och faktureras inte för sig.
 
 ## Rödflaggor
 
